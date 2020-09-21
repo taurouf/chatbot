@@ -142,6 +142,7 @@
     max-width: 50%;
     margin: 20px;
     position: relative;
+    overflow-wrap: anywhere;
 }
 
 .message__wrapper:hover, .message__avatar:hover{
