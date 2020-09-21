@@ -115,15 +115,46 @@ window.onload = function () {
 
         contactsList.appendChild(newChild);
     });
+
+    inputListener();
 }
 
 function contactClickHandler(contactId) {
     console.log(contactId)
 }
 
-function generateMessage(message) { }
+function generateMessage(message) { 
+    console.log(message)
+}
 
-function inputListener() { }
+function inputListener(){
+
+    let input = document.querySelector(".discussion-feed__input");
+   
+    input.addEventListener("keypress", function(event){
+        if(event.keyCode === 13){
+            event.preventDefault();
+
+            if(input.value !="")
+                generateMessage({"time": Date.now(),"content":input.value, "messageClass":"message__container message__container--right"});
+                input.value="";
+        }
+        return;
+    });
+
+    let sendButton = document.querySelector(".send-button");
+
+    sendButton.addEventListener("click", function(event){
+        if(input.value !="")
+            generateMessage({"time": Date.now(),"content":input.value, "messageClass":"message__container message__container--right"})
+        
+    });
+    
+
+}
+
+
+
 
 function botHandler() { }
 
