@@ -8,5 +8,71 @@
 }
 
 
+/* Contacts */
+
+.contacts__discussion__list::-webkit-scrollbar, .discussion-feed__inner::-webkit-scrollbar{
+    width: 10px;
+    opacity: 0.5;
+}
+
+.contacts__discussion__list::-webkit-scrollbar-thumb,  .discussion-feed__inner::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    height: 15%;
+    border-radius: 10px;
+}
+
+.contacts__column{
+    flex: 20%;
+    background-color: white;
+}
+
+.contacts__header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+}
+
+.contacts__header>img{
+    max-width: 30%;
+}
+
+.contacts__header span{
+    padding-top: 1em;
+    font-size: 2vw;
+}
+
+.contacts__discussion__list{
+    max-height: 80%;
+    overflow: auto;
+}
+
+.contact__discussion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    
+}
+
+.contact__discussion > img{
+    max-width: 18%;
+}
+
+.contact__discussion > .discussion__last-message{
+    color:lightgray;
+}
+
+.contact__discussion.selected{
+    background-color: #eeeeee;
+}
+
+.contact__discussion:hover{
+    background-color: rgba(241, 243, 244, 0.90);
+    cursor: pointer;
+}
+
 
 
