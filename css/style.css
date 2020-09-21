@@ -61,8 +61,11 @@
     max-width: 18%;
 }
 
-.contact__discussion > .discussion__last-message{
-    color:lightgray;
+.contact__discussion > .discussion__message-counter{
+    color:white;
+    background-color: lightblue;
+    padding: 5px;
+    border-radius: 50px;
 }
 
 .contact__discussion.selected{
