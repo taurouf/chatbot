@@ -221,7 +221,33 @@ function inputListener() {
   });
 }
 
-function botHandler(message) {}
+
+
+
+function botHandler(message) { 
+ let botFeatures = bots.filter(bot =>{
+        return bot.botId == parseInt(document.querySelector(".selected").id);
+    })[0].botFeatures;
+
+    if(botFeatures.includes(message.content)){
+        let botMessage = {"time":Date.now(), "content":"", "messageClass":"message__container message__container--left"};
+        
+        switch(message.content){
+            case 'time': botMessage.content = "Il est actuellement" + Date.now();
+            break;
+            case 'weather': botMessage.content = "Il fait beau" + Date.now();
+            break;
+            case 'roll': botMessage.content = "Le dé est tombé sur la case 6 !" + 
+            Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+            default: botMessage.content = "Non pris en charge";
+        }
+        generateMessage(botMessage);
+    }else{
+        botMessage.content = "Fonctionnalité non prise en charge \n Celles disponibles sont : " + bot.botFeatures.join(",")       
+    }
+  }
+
+
 
 function scrollBottom() {
   let discussionFeedInner = document.querySelector(".discussion-feed__inner");
