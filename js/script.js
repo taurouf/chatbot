@@ -243,10 +243,9 @@ function botHandler(message) {
         }
         generateMessage(botMessage);
     }else{
-
-         botMessage.content = "Fonctionnalité non prise en charge \n Celles disponibles sont : " + bot.botFeatures.join(",")
-        
-    }}
+        botMessage.content = "Fonctionnalité non prise en charge \n Celles disponibles sont : " + bot.botFeatures.join(",")       
+    }
+  }
 
 
 
