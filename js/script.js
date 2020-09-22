@@ -135,6 +135,8 @@ function contactClickHandler(contactId) {
   bot.messages.forEach((message) => {
     generateMessage(message);
   });
+
+  scrollBottom();
 }
 
 function generateMessage(message) {
@@ -221,33 +223,29 @@ function inputListener() {
   });
 }
 
+function botHandler(message) {
+  let bot = bots.filter(bot => {
+    return bot.botId == document.querySelector(".selected").id.split("t")[1];
+  })[0];
+  let currentDate = new Date();
+  let botMessage = { "time": currentDate, "content": "", "messageClass": "message__container--left" };
 
-
-
-function botHandler(message) { 
- let botFeatures = bots.filter(bot =>{
-        return bot.botId == parseInt(document.querySelector(".selected").id);
-    })[0].botFeatures;
-
-    if(botFeatures.includes(message.content)){
-        let botMessage = {"time":Date.now(), "content":"", "messageClass":"message__container message__container--left"};
-        
-        switch(message.content){
-            case 'time': botMessage.content = "Il est actuellement" + Date.now();
-            break;
-            case 'weather': botMessage.content = "Il fait beau" + Date.now();
-            break;
-            case 'roll': botMessage.content = "Le dé est tombé sur la case 6 !" + 
-            Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-            default: botMessage.content = "Non pris en charge";
-        }
-        generateMessage(botMessage);
-    }else{
-        botMessage.content = "Fonctionnalité non prise en charge \n Celles disponibles sont : " + bot.botFeatures.join(",")       
+  if (bot.botFeatures.includes(message.content)) {
+    switch (message.content) {
+      case 'time':
+        botMessage.content = "Il est actuellement " + currentDate.getHours() + "h " + currentDate.getMinutes();
+        break;
+      case 'weather': botMessage.content = "Il fait actuellement très beau et 25 degrés";
+        break;
+      case 'roll': botMessage.content = "Le dé est tombé sur : " + Math.floor(Math.random() * (7 - 1) + 1);
+        break;
     }
+  } else {
+    botMessage.content = "Fonctionnalité non prise en charge \n Celles disponibles sont : " + bot.botFeatures.join(",")
+
   }
-
-
+  generateMessage(botMessage);
+}
 
 function scrollBottom() {
   let discussionFeedInner = document.querySelector(".discussion-feed__inner");
