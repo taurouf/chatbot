@@ -127,6 +127,9 @@
     justify-content: flex-end;
 }
 
+.message__container span{
+    font-size: small;
+}
 .message__wrapper{
     border-radius: 20px;
     display: flex;
