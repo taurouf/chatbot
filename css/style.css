@@ -7,7 +7,6 @@
     display: flex;
 }
 
-
 /* Contacts */
 
 .contacts__discussion__list::-webkit-scrollbar, .discussion-feed__inner::-webkit-scrollbar{
@@ -77,10 +76,6 @@
     cursor: pointer;
 }
 
-
-
-
-
 /* Discussion feed */
 
 .discussion-feed{
@@ -98,7 +93,7 @@
     position: sticky;
     top: 0;
     height: 50px;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .discussion-feed__header > :nth-child(1){
@@ -113,7 +108,6 @@
     position: relative;
     padding: 20px;
 }
-
 
 /* Messages */
 
@@ -172,7 +166,6 @@ border-bottom-left-radius: 4px;
 .message__avatar {
     max-width: 5%;
 }
-
 /* Discussion user input */
 
 .input__container{
