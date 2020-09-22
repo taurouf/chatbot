@@ -44,7 +44,7 @@
 }
 
 .contacts__discussion__list{
-    max-height: 80%;
+    max-height: 100%;
     overflow: auto;
 }
 
@@ -93,7 +93,7 @@
     position: sticky;
     top: 0;
     height: 50px;
-    z-index: 1000;
+    z-index: 2;
 }
 
 .discussion-feed__header > :nth-child(1){
@@ -116,6 +116,7 @@
     background-color: white;
     display: flex;
     align-items: center;
+    z-index: 1;
 }
 
 .message__container--left{
@@ -178,6 +179,7 @@ border-bottom-left-radius: 4px;
     position: fixed;
     bottom: 0;
     margin: 15px;
+    display: none;
 }
 
 .discussion-feed__input{

@@ -86,6 +86,7 @@ let bots = [
   },
 
 
+
 ];
 
 window.onload = function () {
@@ -95,24 +96,19 @@ window.onload = function () {
 function main() {
 
   let contactsList = document.querySelector(".contacts__discussion__list");
-  var i=0;
+
   bots.forEach(function (bot) {
     let newChild = document.createElement("div");
-    newChild.className = "contact__discussion";
-    newChild.id = "bot" + bot.botId;
-    if(i==0)
-      newChild.classList.add("selected")
-      i++
-    let contactAvatar = document.createElement("img");
-    contactAvatar.src = bot.botAvatar;
-
-    let contactName = document.createElement("span");
-    contactName.innerText = bot.botName;
-
     let messagesCounter = document.createElement("span");
+    let contactAvatar = document.createElement("img");
+    let contactName = document.createElement("span");
+
+    contactAvatar.src = bot.botAvatar;
+    contactName.innerText = bot.botName;
     messagesCounter.className = "discussion__message-counter";
     messagesCounter.innerText = bot.messages.length;
-
+    newChild.className = "contact__discussion";
+    newChild.id = "bot" + bot.botId;
     newChild.append(contactAvatar, contactName, messagesCounter);
     newChild.addEventListener('click', function () {
       contactClickHandler(newChild.id);
@@ -125,12 +121,13 @@ function main() {
 }
 
 function contactClickHandler(contactId) {
-    if (document.querySelector(".selected") != null) {
+  let discussionFeedInner = document.querySelector(".discussion-feed__inner");
+
+  if (document.querySelector(".selected") != null) {
     document.querySelector(".selected").classList.remove("selected");
   }
 
   document.querySelector("#" + contactId).classList.add("selected");
-  document.querySelector(".discussion-feed__inner h2").remove();
 
   let bot = bots.filter((bot) => {
     return bot.botId == contactId.split("t")[1];
@@ -140,46 +137,45 @@ function contactClickHandler(contactId) {
 
   bot.messages.forEach((message) => {
     generateMessage(message);
-  })
- }
+  });
+
+}
 
 function generateMessage(message) { }
 
 function inputListener() {
 
   let input = document.querySelector(".discussion-feed__input");
-  let discussionFeedInner = document.querySelector(".discussion-feed__inner");
-  
+
   input.addEventListener("keypress", function (event) {
     if (event.keyCode === 13) {
       event.preventDefault();
-      botHandler({ "time": new Date, "content": input.value, "messageClass": "message__container message__container--right" });
-      if (input.value != "")
-        generateMessage({ "time": new Date, "content": input.value, "messageClass": "message__container message__container--right" });
+      if (input.value.length != 0)
+        generateMessage({ "time": new Date, "content": input.value, "messageClass": "message__container--right" });
+        botHandler({ "time": new Date, "content": input.value, "messageClass": "message__container--right" });
         input.value = "";
         scrollBottom();
-      }
+    }
   });
 
   let sendButton = document.querySelector(".send-button");
 
   sendButton.addEventListener("click", function (event) {
-    if (input.value != "")
-      generateMessage({ "time": new Date, "content": input.value, "messageClass": "message__container message__container--right" })
+    if (input.value.length != 0){
+      generateMessage({ "time": new Date, "content": input.value, "messageClass": "message__container--right" })
+      botHandler({ "time": new Date, "content": input.value, "messageClass": "message__container--right" });
       input.value = "";
       scrollBottom();
-    });
-
-    function scrollBottom(){
-      discussionFeedInner.scrollTop = 
-      discussionFeedInner.scrollHeight-discussionFeedInner.clientHeight;
     }
+  });
 }
-
-
-
 
 function botHandler(message) { }
 
+function scrollBottom() {
+  let discussionFeedInner = document.querySelector(".discussion-feed__inner");
 
+  discussionFeedInner.scrollTop =
+    discussionFeedInner.scrollHeight - discussionFeedInner.clientHeight;
+}
 
