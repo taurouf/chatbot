@@ -11,9 +11,11 @@ A responsive website for demonstration purposes of a javascript chatbot.
 
 # [![forthebadge](https://forthebadge.com/images/badges/built-by-crips.svg)](https://forthebadge.com) 
 
-#[![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com)
-#[![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
-#[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 
 # AUTHOR 
 Julien Dupont
