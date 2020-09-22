@@ -124,7 +124,25 @@ function main() {
   inputListener();
 }
 
-function contactClickHandler(contactId) { }
+function contactClickHandler(contactId) {
+    if (document.querySelector(".selected") != null) {
+    document.querySelector(".selected").classList.remove("selected");
+  }
+
+  document.querySelector("#" + contactId).classList.add("selected");
+
+  let bot = bots.filter((bot) => {
+    return bot.botId == contactId.split("t")[1];
+  })[0];
+
+  console.log(bot);
+  document.querySelector(".discussion-feed__header h1").innerText = bot.botName;
+
+  bot.messages.forEach((message) => {
+    generateMessage(message);
+  })
+
+ }
 
 function generateMessage(message) { }
 
