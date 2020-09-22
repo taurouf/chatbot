@@ -176,6 +176,7 @@ border-bottom-left-radius: 4px;
 /* Discussion user input */
 
 .input__container{
+    z-index: 100;
     width: 50%;
     height: 8%;
     display: flex;

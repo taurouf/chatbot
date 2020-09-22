@@ -88,21 +88,21 @@ let bots = [
 
 ];
 
-// Builds contact and inserts them in the list,
-// and add click listener to contacts  
 window.onload = function () {
   main();
 }
 
 function main() {
 
-  let contactsList = document.getElementsByClassName("contacts__discussion__list")[0];
-
+  let contactsList = document.querySelector(".contacts__discussion__list");
+  var i=0;
   bots.forEach(function (bot) {
     let newChild = document.createElement("div");
     newChild.className = "contact__discussion";
     newChild.id = "bot" + bot.botId;
-
+    if(i==0)
+      newChild.classList.add("selected")
+      i++
     let contactAvatar = document.createElement("img");
     contactAvatar.src = bot.botAvatar;
 
@@ -131,24 +131,32 @@ function generateMessage(message) { }
 function inputListener() {
 
   let input = document.querySelector(".discussion-feed__input");
-
+  let discussionFeedInner = document.querySelector(".discussion-feed__inner");
+  
   input.addEventListener("keypress", function (event) {
     if (event.keyCode === 13) {
       event.preventDefault();
       botHandler({ "time": new Date, "content": input.value, "messageClass": "message__container message__container--right" });
       if (input.value != "")
-        generateMessage({ "time": new Date, "content": input.value, "messageClass": "message__container message__container--right" }, 1);
-      input.value = "";
-    }
-    return;
+        generateMessage({ "time": new Date, "content": input.value, "messageClass": "message__container message__container--right" });
+        input.value = "";
+        scrollBottom();
+      }
   });
 
   let sendButton = document.querySelector(".send-button");
 
   sendButton.addEventListener("click", function (event) {
     if (input.value != "")
-      generateMessage({ "time": new Date, "content": input.value, "messageClass": "message__container message__container--right" }, 1)
-  });
+      generateMessage({ "time": new Date, "content": input.value, "messageClass": "message__container message__container--right" })
+      input.value = "";
+      scrollBottom();
+    });
+
+    function scrollBottom(){
+      discussionFeedInner.scrollTop = 
+      discussionFeedInner.scrollHeight-discussionFeedInner.clientHeight;
+    }
 }
 
 
