@@ -121,19 +121,24 @@ function main() {
 }
 
 function contactClickHandler(contactId) {
+  let bot = bots.filter((bot) => {
+    return bot.botId == contactId.split("t")[1];
+  })[0];
   let discussionFeedInner = document.querySelector(".discussion-feed__inner");
 
   if (document.querySelector(".selected") != null) {
     document.querySelector(".selected").classList.remove("selected");
   }
-
+  document.querySelector(".input__container").style.display="block"
   document.querySelector("#" + contactId).classList.add("selected");
-
-  let bot = bots.filter((bot) => {
-    return bot.botId == contactId.split("t")[1];
-  })[0];
-
   document.querySelector(".discussion-feed__header h1").innerText = bot.botName;
+
+    Array.from(discussionFeedInner.children).forEach(
+    child => {
+      if(!child.classList.contains("input__container"))
+        child.remove()
+    }
+  );
 
   bot.messages.forEach((message) => {
     generateMessage(message);
