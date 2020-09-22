@@ -130,6 +130,7 @@ function contactClickHandler(contactId) {
   }
 
   document.querySelector("#" + contactId).classList.add("selected");
+  document.querySelector(".discussion-feed__inner h2").remove();
 
   let bot = bots.filter((bot) => {
     return bot.botId == contactId.split("t")[1];
