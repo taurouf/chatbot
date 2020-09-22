@@ -151,6 +151,7 @@ function generateMessage(message) { }
 function inputListener() {
 
   let input = document.querySelector(".discussion-feed__input");
+  let sendButton = document.querySelector(".send-button");
 
   input.addEventListener("keypress", function (event) {
     if (event.keyCode === 13) {
@@ -162,8 +163,6 @@ function inputListener() {
         scrollBottom();
     }
   });
-
-  let sendButton = document.querySelector(".send-button");
 
   sendButton.addEventListener("click", function (event) {
     if (input.value.length != 0){
@@ -179,7 +178,6 @@ function botHandler(message) { }
 
 function scrollBottom() {
   let discussionFeedInner = document.querySelector(".discussion-feed__inner");
-
   discussionFeedInner.scrollTop =
     discussionFeedInner.scrollHeight - discussionFeedInner.clientHeight;
 }
