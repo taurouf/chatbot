@@ -7,7 +7,7 @@ let bots = [
     messages: [
       {
         time: new Date(new Date().setHours(9, 05)),
-        content: "heure",
+        content: "time",
         messageClass: "message__container--right",
       },
       {
@@ -17,7 +17,7 @@ let bots = [
       },
       {
         time: new Date(new Date().setHours(12, 15)),
-        content: "meteo",
+        content: "weather",
         messageClass: "message__container--right",
       },
       {
@@ -35,7 +35,7 @@ let bots = [
     messages: [
       {
         time: new Date(new Date().setHours(12, 15)),
-        content: "heure",
+        content: "time",
         messageClass: "message__container--right",
       },
       {
@@ -44,12 +44,12 @@ let bots = [
         messageClass: "message__container--left",
       },
       {
-        time: new Date().setHours(12, 40),
+        time: new Date(new Date().setHours(12, 15)),
         content: "roll",
         messageClass: "message__container--right",
       },
       {
-        time: new Date().setHours(12, 40),
+        time: new Date(new Date().setHours(12, 15)),
         content: "Le dé est tombé sur la case 6 !",
         messageClass: "message__container--left",
       },
@@ -57,13 +57,13 @@ let bots = [
   },
   {
     botId: 3,
-    botName: "Sarah Croche",
+    botName: "Sarah Pelle",
     botAvatar: "./images/avatar.png",
     botFeatures: ["roll", "time", "weather"],
     messages: [
       {
         time: new Date(new Date().setHours(12, 15)),
-        content: "heure",
+        content: "time",
         messageClass: "message__container--right",
       },
       {
@@ -241,7 +241,7 @@ function botHandler(message) {
         break;
       case 'weather': botMessage.content = "Il fait actuellement très beau et 25 degrés";
         break;
-      case 'roll': botMessage.content = "Lge dé est tombé sur : " + Math.floor(Math.random() * (7 - 1) + 1);
+      case 'roll': botMessage.content = "Le dé est tombé sur : " + Math.floor(Math.random() * (7 - 1) + 1);
         break;
     }
   } else {
