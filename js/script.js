@@ -6,22 +6,22 @@ let bots = [
     botFeatures: ["weather", "time"],
     messages: [
       {
-        time: new Date().setHours(12, 15),
+        time: new Date(new Date().setHours(9, 05)),
         content: "heure",
         messageClass: "message__container--right",
       },
       {
-        time: new Date().setHours(12, 15),
+        time: new Date(new Date().setHours(12, 15)),
         content: "Il est 12 h 15 :)",
         messageClass: "message__container--left",
       },
       {
-        time: new Date().setHours(12, 17),
+        time: new Date(new Date().setHours(12, 15)),
         content: "meteo",
         messageClass: "message__container--right",
       },
       {
-        time: new Date().setHours(12, 17),
+        time: new Date(new Date().setHours(12, 15)),
         content: "Il fait soleil et 24 degrés",
         messageClass: "message__container--left",
       },
@@ -34,12 +34,12 @@ let bots = [
     botFeatures: ["roll", "time"],
     messages: [
       {
-        time: new Date().setHours(12, 19),
+        time: new Date(new Date().setHours(12, 15)),
         content: "heure",
         messageClass: "message__container--right",
       },
       {
-        time: new Date().setHours(12, 19),
+        time: new Date(new Date().setHours(12, 15)),
         content: "Il est 12 h 19 :)",
         messageClass: "message__container--left",
       },
@@ -59,25 +59,25 @@ let bots = [
     botId: 3,
     botName: "Sarah Croche",
     botAvatar: "./images/avatar.png",
-    botFeatures: ["roll", "time"],
+    botFeatures: ["roll", "time", "weather"],
     messages: [
       {
-        time: new Date().setHours(12, 19),
+        time: new Date(new Date().setHours(12, 15)),
         content: "heure",
         messageClass: "message__container--right",
       },
       {
-        time: new Date().setHours(12, 19),
+        time: new Date(new Date().setHours(12, 15)),
         content: "Il est 12 h 19 :)",
         messageClass: "message__container--left",
       },
       {
-        time: new Date().setHours(12, 40),
+        time: new Date(new Date().setHours(12, 15)),
         content: "roll",
         messageClass: "message__container--right",
       },
       {
-        time: new Date().setHours(12, 40),
+        time: new Date(new Date().setHours(12, 15)),
         content: "Le dé est tombé sur la case 6 !",
         messageClass: "message__container--left",
       },
@@ -144,7 +144,7 @@ function generateMessage(message) {
   let discussionFeedInner = document.querySelector(".discussion-feed__inner");
   let newMessage = document.createElement("div");
   let messageWrapper = document.createElement("div");
-  let messageContent = document.createElement("div");
+  let messageContent = document.createElement("p");
   let messageTime = document.createElement("span");
   let bot = bots.filter((bot) => {
     return bot.botId == currentDiscussion.id.split("t")[1];
@@ -152,6 +152,13 @@ function generateMessage(message) {
 
   messageWrapper.className = "message__wrapper";
   newMessage.className = "message__container";
+  messageContent.className = "message__content";
+  messageContent.innerText = message.content;
+  messageTime.innerText =
+    hours_with_leading_zeros(message.time)+ ":"
+    + minutes_with_leading_zeros(message.time);
+
+  messageWrapper.appendChild(messageContent);
 
   if (message.messageClass === "message__container--left") {
     let avatar = document.createElement("img");
@@ -160,21 +167,18 @@ function generateMessage(message) {
     newMessage.appendChild(avatar);
     messageWrapper.classList.add("message__wrapper--left");
   } else {
+    newMessage.appendChild(messageTime);
     messageWrapper.classList.add("message__wrapper--right");
   }
 
-  messageContent.className = "message__content";
-  messageContent.innerText = message.content;
-  messageTime.innerText =
-    "13:10"; /*message.time.getHours() + ":"
-    + message.time.getMinutes();*/
-
-  messageWrapper.append(messageContent, messageTime);
-
   newMessage.appendChild(messageWrapper);
+  if(message.messageClass === "message__container--left"){
+    newMessage.appendChild(messageTime);
+  }
   newMessage.classList.add(message.messageClass);
-
   discussionFeedInner.appendChild(newMessage);
+
+
   if (!bot.messages.includes(message)) {
     bot.messages.push(message);
   }
@@ -237,7 +241,7 @@ function botHandler(message) {
         break;
       case 'weather': botMessage.content = "Il fait actuellement très beau et 25 degrés";
         break;
-      case 'roll': botMessage.content = "Le dé est tombé sur : " + Math.floor(Math.random() * (7 - 1) + 1);
+      case 'roll': botMessage.content = "Lge dé est tombé sur : " + Math.floor(Math.random() * (7 - 1) + 1);
         break;
     }
   } else {
@@ -251,4 +255,14 @@ function scrollBottom() {
   let discussionFeedInner = document.querySelector(".discussion-feed__inner");
   discussionFeedInner.scrollTop =
     discussionFeedInner.scrollHeight - discussionFeedInner.clientHeight;
+}
+
+function minutes_with_leading_zeros(date) 
+{ 
+  return (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+}
+
+function hours_with_leading_zeros(date) 
+{ 
+  return (date.getHours() < 10 ? '0' : '') + date.getHours();
 }
